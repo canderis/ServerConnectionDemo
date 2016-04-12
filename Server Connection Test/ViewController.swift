@@ -24,6 +24,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func establishConnection(sender: UIButton) {
+        
+        ajaxRequest(
+            ["data":dataToSend.text!],
+            url: "http://dev.canderis.com/ServerConnectionTest/conntection.php",
+            success: { (response) -> () in
+                print(response)
+                self.serverOutput.text = "\(response["data"])"
+            },
+            failure:{ (error) -> () in
+                self.serverOutput.text = "errorString = \(error)"
+            }
+        )
+        
+        /*
         let myUrl = NSURL(string: "http://dev.canderis.com/ServerConnectionTest/conntection.php");
         let request = NSMutableURLRequest(URL:myUrl!);
         request.HTTPMethod = "POST";
@@ -67,6 +81,87 @@ class ViewController: UIViewController {
             
         }
         task.resume()
+        */
     }
+    
+    func ajaxRequest( params: Dictionary<String, String>, url: String, success: (([String:AnyObject])->())? = nil, failure: ((String)->())? = nil ) {
+        
+        let nsurl = NSURL(string: url)
+        
+        do {
+            print(params)
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.PrettyPrinted)
+            print(jsonData)
+            
+            // create post request
+            let request = NSMutableURLRequest(URL: nsurl!)
+            request.HTTPMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            do {
+                let decoded = try NSJSONSerialization.JSONObjectWithData(jsonData, options: []) as? [String:String]
+                // here "decoded" is the dictionary decoded from JSON data
+                print(decoded)
+            } catch let error as NSError {
+                print(error)
+            }
+            
+            print (request)
+            // insert json data to the request
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = jsonData
+            
+            print(request)
+            
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                if error != nil{
+                    if failure == nil{
+                        print("Error -> \(error)")
+
+                    }
+                    else {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            failure!("\(error)")
+                        })
+
+                    }
+                    return
+                }
+                
+                do {
+                    let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        success?(result!)
+                    })
+                    
+                } catch {
+                    if failure == nil{
+                        print("Error -> \(error)")
+                    }
+                    else {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            failure!("\(error)")
+                        })
+                    }
+                    return
+                }
+            }
+            
+            task.resume()
+            
+        }
+        catch {
+            if failure == nil{
+                print("Error -> \(error)")
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    failure!("\(error)")
+                })
+            }
+        }
+    }
+
 }
 
