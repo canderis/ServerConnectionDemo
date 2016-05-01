@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		908494D21CD6AD5400320B47 /* AjaxRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908494D11CD6AD5400320B47 /* AjaxRequest.swift */; };
 		90C418CB1C94C813005A719D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C418CA1C94C813005A719D /* AppDelegate.swift */; };
 		90C418CD1C94C813005A719D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C418CC1C94C813005A719D /* ViewController.swift */; };
 		90C418D01C94C813005A719D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90C418CE1C94C813005A719D /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		908494D11CD6AD5400320B47 /* AjaxRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AjaxRequest.swift; sourceTree = "<group>"; };
 		90C418C71C94C813005A719D /* Server Connection Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Server Connection Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C418CA1C94C813005A719D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90C418CC1C94C813005A719D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			children = (
 				90C418CA1C94C813005A719D /* AppDelegate.swift */,
 				90C418CC1C94C813005A719D /* ViewController.swift */,
+				908494D11CD6AD5400320B47 /* AjaxRequest.swift */,
 				90C418CE1C94C813005A719D /* Main.storyboard */,
 				90C418D11C94C813005A719D /* Assets.xcassets */,
 				90C418D31C94C813005A719D /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				90C418CD1C94C813005A719D /* ViewController.swift in Sources */,
 				90C418CB1C94C813005A719D /* AppDelegate.swift in Sources */,
+				908494D21CD6AD5400320B47 /* AjaxRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +295,7 @@
 				90C418DB1C94C813005A719D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
